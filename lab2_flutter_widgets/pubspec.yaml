@@ -1,5 +1,5 @@
-name: lab2
-description: Practical Assignment #2
+name: lab_2
+description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -29,8 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
+  http: ^0.13.4
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -57,14 +56,19 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  # To add images to your application, add an images section, like this:
   assets:
-     - images/flower.jpg
+     - images/avatar.jpg
+     - images/pin1.jpg
+     - images/pin2.jpg
+     - images/pin3.jpg
+     - images/pin4.jpg
+     - images/image.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
-  # For details regarding adding assets from package dependencies, see
+  # For details regarding adding images from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
   # To add custom fonts to your application, add a fonts section here,
@@ -73,9 +77,17 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: MPLUSRounded1c
-      fonts:
-        - asset: fonts/MPLUSRounded1c-Regular.ttf
+#     - family: Schyler
+#       fonts:
+#         - asset: fonts/Schyler-Regular.ttf
+#         - asset: fonts/Schyler-Italic.ttf
+#           style: italic
+     - family: Trajan Pro
+       fonts:
+         - asset: fonts/Roboto-Regular.ttf
+         - asset: fonts/Roboto-Medium.ttf
+         - asset: fonts/Roboto-Bold.ttf
+           weight: 400
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

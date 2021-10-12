@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:lab2/pages/home.dart';
-import 'package:lab2/pages/main_screen.dart';
+import 'package:lab_2/routes/hide_on_scroll.dart';
 
-void main() => runApp(MaterialApp(
-  theme: ThemeData(
-    primaryColor: Colors.orange,
-  ),
-  initialRoute: '/',
-  routes: {
-    '/': (context) => MainScreen(),
-    '/todo': (context) => Home(),
-  },
-));
 
+void main() {
+  runApp(MyFirstApp());
+}
+
+class MyFirstApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyFirstApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        brightness: Brightness.light,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: HideOnScroll(),
+    );
+  }
+}
