@@ -17,7 +17,7 @@ class CallsPage extends StatelessWidget {
         appBar: AppBar(
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: const [
               TabBar(
                 tabs: [
                   Tab(

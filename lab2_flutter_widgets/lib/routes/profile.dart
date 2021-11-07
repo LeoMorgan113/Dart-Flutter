@@ -1,6 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:lab_2/routes/named_icon.dart';
 
+import '../main.dart';
+
+class PinsCardWidget extends StatelessWidget {
+  final String img;
+  final String title;
+  final String subtitle;
+
+  const PinsCardWidget(
+      {Key? key,
+      required this.img,
+      required this.title,
+      required this.subtitle})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 290,
+      child: Card(
+          child: Column(children: [
+        Container(
+          height: 260,
+          margin: const EdgeInsets.only(top: 30),
+          child: Image.asset('images/' + img + '.jpg'),
+        ),
+        ListTile(
+          title: Text(title),
+          subtitle: Text(subtitle),
+        ),
+      ])),
+    );
+  }
+}
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -13,85 +47,108 @@ class _ProfileState extends State<Profile> {
   final myController = TextEditingController();
   String name = 'Leo Morgan';
   String nickName = '@leo_morgan33';
+  String btnText = 'Subscribe';
+  String subscriptionText = 'Now you follow this user';
   int _count = 0;
+  bool _hasBeenPressed = false;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState() {
-      _count = 22;
-    }
-  }
+  List<Pins> pins = [
+    Pins('pin1', 'All pins', '120 pins'),
+    Pins('pin2', 'Autumn looks', '17 pins'),
+    Pins('pin3', 'Inspirations', '10 pins'),
+    Pins('pin4', 'Aesthetics', '15 pins')
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Profile'), actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.subscriptions_outlined),
-          tooltip: 'Show Snackbar',
-          onPressed: () {
-            setState(() {
-              _count++;
-            });
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Now you follow this user.')));
-          },
+        NamedIcon(
+          text: 'Mails',
+          iconData: Icons.subscriptions_outlined,
+          notificationCount: _count,
+          onTap: () {},
         ),
       ]),
       body: Column(children: <Widget>[
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 30),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                        blurRadius: 30,
-                        color: Colors.redAccent,
-                        spreadRadius: 2,
+                      blurRadius: 30,
+                      color: Colors.redAccent,
+                      spreadRadius: 2,
                     )
                   ],
                 ),
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 60,
                   backgroundImage: AssetImage('images/avatar.jpg'),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 15),
               ),
               Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 35,
                   color: Colors.black,
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 10)),
+              const Padding(padding: EdgeInsets.only(top: 10)),
               Row(
                 children: [
                   Text(
                     nickName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                     ),
                   ),
                 ],
               ),
+              const Padding(padding: EdgeInsets.only(top: 10)),
+              Row(
+                children: [
+                  FlatButton(
+                    onPressed: () {
+                      setState(() {
+                        _hasBeenPressed = !_hasBeenPressed;
+                        if (_hasBeenPressed) {
+                          _count++;
+                          btnText = 'Unsubscribe';
+                          subscriptionText = 'Now you follow this user';
+                        } else {
+                          _count--;
+                          btnText = 'Subscribe';
+                          subscriptionText = 'Now you not follow this user';
+                        }
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(subscriptionText)));
+                    },
+                    child: Text(btnText),
+                    textColor: Colors.black,
+                    color: _hasBeenPressed ? Colors.red : Colors.grey,
+                  ),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.only(top: 10)),
               Row(
                 children: [
                   Text(
                     '$_count subscribers',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 10)),
+                  const Padding(padding: EdgeInsets.only(left: 10)),
                   Icon(Icons.people_alt),
                   Padding(padding: EdgeInsets.only(left: 10)),
                   Text(
@@ -111,62 +168,10 @@ class _ProfileState extends State<Profile> {
             mainAxisSpacing: 10,
             crossAxisCount: 2,
             children: <Widget>[
-              Container(
-                height: 290,
-                child: Card(
-                    child: Column(children: [
-                  Container(
-                    height: 270,
-                    child: Image.asset('images/pin1.jpg', fit: BoxFit.cover),
-                  ),
-                  ListTile(
-                    title: const Text('All pins'),
-                    subtitle: const Text('120 pins'),
-                  ),
-                ])),
-              ),
-              Container(
-                height: 290,
-                child: Card(
-                    child: Column(children: [
-                  Container(
-                    height: 270,
-                    child: Image.asset('images/pin2.jpg', fit: BoxFit.cover),
-                  ),
-                  ListTile(
-                    title: const Text('Autumn looks'),
-                    subtitle: const Text('17 pins'),
-                  ),
-                ])),
-              ),
-              Container(
-                height: 290,
-                child: Card(
-                    child: Column(children: [
-                  Container(
-                    height: 270,
-                    child: Image.asset('images/pin3.jpg', fit: BoxFit.cover),
-                  ),
-                  ListTile(
-                    title: const Text('Inspirations'),
-                    subtitle: const Text('10 pins'),
-                  ),
-                ])),
-              ),
-              Container(
-                height: 290,
-                child: Card(
-                    child: Column(children: [
-                  Container(
-                    height: 270,
-                    child: Image.asset('images/pin4.jpg', fit: BoxFit.cover),
-                  ),
-                  ListTile(
-                    title: const Text('Aesthetics'),
-                    subtitle: const Text('15 pins'),
-                  ),
-                ])),
-              ),
+              ...pins
+                  .map((pin) => PinsCardWidget(
+                  img: pin.img, title: pin.title, subtitle: pin.subtitle))
+                  .toList()
             ],
           ),
         ),
@@ -194,3 +199,4 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
+

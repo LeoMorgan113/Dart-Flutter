@@ -106,7 +106,7 @@ class _MainPageState extends State<MainPage>
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.more_horiz_rounded),
+                      icon: const Icon(Icons.more_horiz_rounded),
                       color: Colors.redAccent,
                       onPressed: () {
                         /* ... */
@@ -129,7 +129,7 @@ class _MainPageState extends State<MainPage>
         body: Center(
           child: GridView.builder(
             gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemCount: imagesUrl.length,
             itemBuilder: (BuildContext context, int index) {
               return ImageHeroCell(context, index);
@@ -180,9 +180,9 @@ class _MyDetailPageState extends State<MyDetailPage> {
           ),
           Card(
               elevation: 8,
-              margin: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(16),
               child: Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text('Link to photo: ' + superHero.link),
               )),
         ],

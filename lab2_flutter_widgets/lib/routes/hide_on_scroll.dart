@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lab_2/routes/notification.dart';
 import 'package:lab_2/routes/profile.dart';
 import 'package:lab_2/routes/calls_page.dart';
+import 'package:badges/badges.dart';
 
 
 class HideOnScroll extends StatefulWidget {
@@ -62,16 +63,23 @@ class _HideOnScrollState extends State<HideOnScroll>
         child: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled),
+          items: <BottomNavigationBarItem>[
+            const BottomNavigationBarItem(
               label: 'Home',
+              icon: Icon(Icons.home_filled),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat_rounded),
+              icon: Stack(
+                  children: <Widget>[
+                    Badge(
+                      badgeContent: Text(""),
+                      child: const Icon(Icons.chat_rounded),
+                    )
+                  ]
+              ),
               label: 'Notifications',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
               label: 'Profile',
             ),

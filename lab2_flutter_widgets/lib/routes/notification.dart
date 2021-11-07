@@ -59,7 +59,7 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'),
+        title: const Text('Notifications'),
       ),
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
@@ -74,40 +74,40 @@ class _NotificationsState extends State<Notifications> {
                             return Card(
                               child: ListTile(
                                 title: Text("User${index + 1} likes your post."),
-                                trailing: Icon(Icons.favorite),
+                                trailing: const Icon(Icons.favorite),
                               ),
                             );
                           } else {
                             return Expanded(
                               child: ListTile(
-                                leading: FlutterLogo(),
+                                leading: const FlutterLogo(),
                                 title: Text(
                                     "Seems you should be interested in topic${index + 1}"),
                               ),
                             );
                           }
                         } else {
-                          return Container(
+                          return SizedBox(
                             width: constraints.maxWidth,
                             height: 50,
-                            child: Center(
+                            child: const Center(
                               child: Text('No notifications any more'),
                             ),
                           );
                         }
                       },
                       separatorBuilder: (context, index) {
-                        return Divider(height: 1);
+                        return const Divider(height: 1);
                       },
                       itemCount: items.length + (allLoaded ? 1 : 0)),
                   if (loading) ...[
                     Positioned(
                       left: 0,
                       bottom: 0,
-                      child: Container(
+                      child: SizedBox(
                         width: constraints.maxWidth,
                         height: 80,
-                        child: Center(
+                        child: const Center(
                           child: CircularProgressIndicator(),
                         ),
                       ),
@@ -116,10 +116,8 @@ class _NotificationsState extends State<Notifications> {
                 ],
               );
             } else {
-              return Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             }
           }),
@@ -148,7 +146,7 @@ class _NotificationsState extends State<Notifications> {
             ),
             Card(
               child: ListTile(
-                leading: Icon(Icons.subscriptions_outlined),
+                leading: const Icon(Icons.subscriptions_outlined),
                 title: const Text('Subscription'),
                 onTap: () {
                   Navigator.pop(context);
@@ -157,7 +155,7 @@ class _NotificationsState extends State<Notifications> {
             ),
             Card(
               child: ListTile(
-                leading: Icon(Icons.favorite),
+                leading: const Icon(Icons.favorite),
                 title: const Text('Likes'),
                 onTap: () {
                   Navigator.pop(context);
@@ -166,7 +164,7 @@ class _NotificationsState extends State<Notifications> {
             ),
             Card(
               child: ListTile(
-                leading: Icon(Icons.image_outlined),
+                leading: const Icon(Icons.image_outlined),
                 title: const Text('Suggestion'),
                 onTap: () {
                   Navigator.pop(context);
