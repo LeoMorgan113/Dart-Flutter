@@ -4,7 +4,7 @@ import 'package:lab_2/routes/hide_on_scroll.dart';
 import 'package:lab_2/routes/notification.dart';
 import 'package:lab_2/routes/profile.dart';
 import 'package:lab_2/routes/settings_provider.dart';
-import 'package:lab_2/routes/suggestions.dart';
+import 'package:lab_2/routes/settings.dart';
 import 'package:provider/provider.dart';
 import 'routes/page_route.dart';
 

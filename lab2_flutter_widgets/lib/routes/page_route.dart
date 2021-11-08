@@ -2,7 +2,7 @@ import 'dart:core';
 import 'package:lab_2/routes/notification.dart';
 import 'package:lab_2/routes/profile.dart';
 
-import 'suggestions.dart';
+import 'settings.dart';
 
 class PageRoutes {
   static const String suggestions = Settings.routeName;
