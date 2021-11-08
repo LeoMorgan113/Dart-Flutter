@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 
 class NamedIcon extends StatelessWidget {
   final IconData iconData;
-  final String text;
-  final VoidCallback onTap;
   final int notificationCount;
 
   const NamedIcon({
     Key? key,
-    required this.onTap,
-    required this.text,
     required this.iconData,
     required this.notificationCount,
   }) : super(key: key);
@@ -17,7 +13,6 @@ class NamedIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
       child: Container(
         width: 72,
         padding: const EdgeInsets.symmetric(horizontal: 8),

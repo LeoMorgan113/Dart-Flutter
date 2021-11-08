@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:lab_2/main.dart';
+import 'package:lab_2/routes/navigation_drawer.dart';
+
 
 
 class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
+  static const String routeName = '/notifications';
 
   @override
   _NotificationsState createState() => _NotificationsState();
@@ -13,6 +17,7 @@ class _NotificationsState extends State<Notifications> {
   final ScrollController _scrollController = ScrollController();
   List<String> items = [];
   bool loading = false, allLoaded = false;
+
 
   mockFetch() async {
     if (allLoaded) {
@@ -121,59 +126,7 @@ class _NotificationsState extends State<Notifications> {
               );
             }
           }),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-              ),
-              child: Center(
-                child: ListTile(
-                  title: Text('Settings',
-                      style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                  subtitle: Text('Turn on/off the notifications:',
-                      style:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.subscriptions_outlined),
-                title: const Text('Subscription'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.favorite),
-                title: const Text('Likes'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.image_outlined),
-                title: const Text('Suggestion'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            )
-          ],
-        ),
-      ),
+      drawer: NavigationDrawer(),
     );
   }
 }

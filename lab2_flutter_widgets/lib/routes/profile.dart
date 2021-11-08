@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lab_2/routes/named_icon.dart';
+import 'package:lab_2/routes/page_route.dart';
 
 import '../main.dart';
 
@@ -35,8 +36,10 @@ class PinsCardWidget extends StatelessWidget {
     );
   }
 }
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+  static const String routeName = '/profile';
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -64,10 +67,8 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(title: Text('Profile'), actions: <Widget>[
         NamedIcon(
-          text: 'Mails',
           iconData: Icons.subscriptions_outlined,
           notificationCount: _count,
-          onTap: () {},
         ),
       ]),
       body: Column(children: <Widget>[
@@ -177,23 +178,7 @@ class _ProfileState extends State<Profile> {
         ),
       ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text('User Settings'),
-            content: Text('User name: ' + name + '\nLogin: ' + nickName),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Submit'),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        ),
+        onPressed: () => Navigator.pushReplacementNamed(context, PageRoutes.suggestions),
         child: Icon(Icons.settings),
       ),
     );

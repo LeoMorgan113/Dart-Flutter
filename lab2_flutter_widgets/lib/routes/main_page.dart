@@ -14,6 +14,7 @@ class ImageHero {
 
 class MainPage extends StatefulWidget {
   final Function(bool) isHideBottomNavBar;
+  static const String routeName = '/main';
 
   MainPage({required this.isHideBottomNavBar});
 

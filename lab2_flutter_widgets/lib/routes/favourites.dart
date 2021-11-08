@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class Favourites extends StatefulWidget {
   final Function(bool) isHideBottomNavBar;
+  static const String routeName = '/favourites';
 
   Favourites({required this.isHideBottomNavBar});
 
