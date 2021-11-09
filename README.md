@@ -17,3 +17,9 @@ Learn Dart Basics
 
 
 #### Practical Assignment #3
+
+* StatefulWidget, StatelessWidget
+* State Management
+* "Lifting State up"
+* ChangeNotifier Class
+* Providers: Consumer, Provider.of()
