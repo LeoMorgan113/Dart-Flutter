@@ -9,14 +9,18 @@ class PinsCardWidget extends StatelessWidget {
   final String img;
   final String title;
   final String subtitle;
-  final VoidCallback setSubscription;
+  final ValueChanged<int> setSubscription;
+  final bool like;
+  final int index;
 
   const PinsCardWidget(
       {Key? key,
       required this.img,
       required this.title,
       required this.subtitle,
-      required this.setSubscription})
+      required this.setSubscription,
+      required this.index,
+      required this.like})
       : super(key: key);
 
   @override
@@ -35,11 +39,11 @@ class PinsCardWidget extends StatelessWidget {
           subtitle: Text(subtitle),
           trailing:  IconButton(
             onPressed: () {
-              setSubscription();
+              setSubscription(index);
             },
             icon:
               Icon(Icons.favorite,
-              color:  Colors.red,)
+              color:  like ? Colors.red : Colors.grey,)
           ),
         ),
       ])),
@@ -72,10 +76,17 @@ class _ProfileState extends State<Profile> {
     Pins('pin3', 'Inspirations', '10 pins'),
     Pins('pin4', 'Aesthetics', '15 pins')
   ];
+  List<bool> likes = List.filled(4, false);
 
-  void setFavourites(){
+  void setFavourites(index){
     setState((){
-      fav++;
+      likes[index] = !likes[index];
+      if(likes[index]){
+        fav++;
+      }else{
+        fav--;
+      }
+
     });
   }
 
@@ -197,11 +208,13 @@ class _ProfileState extends State<Profile> {
             mainAxisSpacing: 10,
             crossAxisCount: 2,
             children: <Widget>[
-              ...pins
-                  .map((pin) => PinsCardWidget(
-                  img: pin.img, title: pin.title, subtitle: pin.subtitle,
-                setSubscription: setFavourites))
-                  .toList()
+              ...pins.asMap().keys.toList().map((index) {
+                  return PinsCardWidget(
+                  img: pins[index].img, title: pins[index].title,
+                      subtitle: pins[index].subtitle,
+                    setSubscription: setFavourites,
+                      index: index, like: likes[index]);
+              }).toList()
             ],
           ),
         ),
