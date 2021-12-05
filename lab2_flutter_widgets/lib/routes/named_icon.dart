@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 class NamedIcon extends StatelessWidget {
   final IconData iconData;
-  final int notificationCount;
+  final int subscriptionCount;
 
   const NamedIcon({
     Key? key,
     required this.iconData,
-    required this.notificationCount,
+    required this.subscriptionCount
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool _likes = true;
     return InkWell(
       child: Container(
         width: 72,
@@ -22,7 +23,9 @@ class NamedIcon extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(iconData),
+
+                Icon(iconData)
+
               ],
             ),
             Positioned(
@@ -32,7 +35,7 @@ class NamedIcon extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
                 alignment: Alignment.center,
-                child: Text('$notificationCount'),
+                child: Text('$subscriptionCount'),
               ),
             )
           ],

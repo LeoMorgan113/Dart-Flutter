@@ -28,7 +28,7 @@ void main() {
   runApp(
       MultiProvider(
         providers:[ ChangeNotifierProvider(
-            create: (_) => SettingsProvider(),
+            create: (_) => SettingsNotifier(),
           )],
         child:MyFirstApp())
   );

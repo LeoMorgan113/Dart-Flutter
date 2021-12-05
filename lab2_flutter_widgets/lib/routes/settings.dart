@@ -35,7 +35,7 @@ class Settings extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Color(0xDDFFFFFF),
             ),
-            child: Consumer<SettingsProvider>(
+            child: Consumer<SettingsNotifier>(
               builder: (context, provider, child) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,8 +85,8 @@ class Settings extends StatelessWidget {
   }
 
   void _showSettings(BuildContext context) {
-    SettingsProvider settingsProvider =
-        Provider.of<SettingsProvider>(context, listen: false);
+    SettingsNotifier settingsProvider =
+        Provider.of<SettingsNotifier>(context, listen: false);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

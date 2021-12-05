@@ -71,12 +71,6 @@ class _MainPageState extends State<MainPage>
     return "Success";
   }
 
-  void clear() {
-    setState(() {
-      count = 0;
-    });
-  }
-
   @override
   void initState() {
     super.initState();

@@ -39,32 +39,29 @@ class _FavouritesState extends State<Favourites>
   }
 
   Future<String> fetchDataFromApi() async {
-    var jsonData = await http.get(
+    http.get(
         Uri.parse("https://picsum.photos/v2/list?page=2&limit=10"),
         headers: {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*"
-        });
-    var fetchData = jsonDecode(jsonData.body);
-    setState(() {
-      data = fetchData;
-      data.forEach((element) {
-        imagesUrl.add(element['download_url']);
+        }).then( (jsonData) {
+      var fetchData = jsonDecode(jsonData.body);
+      setState(() {
+        data = fetchData;
+        for (var element in data) {
+          imagesUrl.add(element['download_url']);
+        }
       });
     });
-    return "Success";
-  }
 
-  void clear() {
-    setState(() {
-      count = 0;
-    });
+    return "Success";
   }
 
   @override
   void initState() {
     super.initState();
     fetchDataFromApi();
+    print(imagesUrl);
   }
 
   @override
@@ -75,7 +72,7 @@ class _FavouritesState extends State<Favourites>
           body: Center(
             child: GridView.builder(
               gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               itemCount: imagesUrl.length,
               itemBuilder: (BuildContext context, int index) {
                 return SingleChildScrollView(

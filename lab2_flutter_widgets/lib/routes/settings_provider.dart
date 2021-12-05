@@ -9,7 +9,7 @@ class SettingsModel {
   SettingsModel(this.name, this.selected);
 }
 
-class SettingsProvider extends ChangeNotifier {
+class SettingsNotifier extends ChangeNotifier {
   final List<SettingsModel> _settings = [
     SettingsModel("Show username for everyone", false),
     SettingsModel("Show my pins to everyone", false),

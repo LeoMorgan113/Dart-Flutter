@@ -9,12 +9,14 @@ class PinsCardWidget extends StatelessWidget {
   final String img;
   final String title;
   final String subtitle;
+  final VoidCallback setSubscription;
 
   const PinsCardWidget(
       {Key? key,
       required this.img,
       required this.title,
-      required this.subtitle})
+      required this.subtitle,
+      required this.setSubscription})
       : super(key: key);
 
   @override
@@ -31,6 +33,14 @@ class PinsCardWidget extends StatelessWidget {
         ListTile(
           title: Text(title),
           subtitle: Text(subtitle),
+          trailing:  IconButton(
+            onPressed: () {
+              setSubscription();
+            },
+            icon:
+              Icon(Icons.favorite,
+              color:  Colors.red,)
+          ),
         ),
       ])),
     );
@@ -54,6 +64,7 @@ class _ProfileState extends State<Profile> {
   String subscriptionText = 'Now you follow this user';
   int _count = 0;
   bool _hasBeenPressed = false;
+  int fav = 0;
 
   List<Pins> pins = [
     Pins('pin1', 'All pins', '120 pins'),
@@ -62,13 +73,35 @@ class _ProfileState extends State<Profile> {
     Pins('pin4', 'Aesthetics', '15 pins')
   ];
 
+  void setFavourites(){
+    setState((){
+      fav++;
+    });
+  }
+
+  void subscription(){
+    setState(() {
+      _hasBeenPressed = !_hasBeenPressed;
+      if (_hasBeenPressed) {
+        _count++;
+        btnText = 'Unsubscribe';
+        subscriptionText = 'Now you follow this user';
+      } else {
+        _count--;
+        btnText = 'Subscribe';
+        subscriptionText = 'Now you not follow this user';
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Profile'), actions: <Widget>[
         NamedIcon(
           iconData: Icons.subscriptions_outlined,
-          notificationCount: _count,
+          subscriptionCount: _count
         ),
       ]),
       body: Column(children: <Widget>[
@@ -121,18 +154,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   FlatButton(
                     onPressed: () {
-                      setState(() {
-                        _hasBeenPressed = !_hasBeenPressed;
-                        if (_hasBeenPressed) {
-                          _count++;
-                          btnText = 'Unsubscribe';
-                          subscriptionText = 'Now you follow this user';
-                        } else {
-                          _count--;
-                          btnText = 'Subscribe';
-                          subscriptionText = 'Now you not follow this user';
-                        }
-                      });
+                      subscription();
                       ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(subscriptionText)));
                     },
@@ -158,20 +180,27 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
+              const Padding(padding: EdgeInsets.only(top: 10)),
+              Row(
+                children: [
+                  Text('$fav favourite collections')
+                ],
+              )
             ],
           ),
         ]),
         Expanded(
           child: GridView.count(
             primary: false,
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.fromLTRB(10, 15, 10, 75),
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             crossAxisCount: 2,
             children: <Widget>[
               ...pins
                   .map((pin) => PinsCardWidget(
-                  img: pin.img, title: pin.title, subtitle: pin.subtitle))
+                  img: pin.img, title: pin.title, subtitle: pin.subtitle,
+                setSubscription: setFavourites))
                   .toList()
             ],
           ),
@@ -184,4 +213,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
