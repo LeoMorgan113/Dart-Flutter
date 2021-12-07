@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:lab_2/main.dart';
 import 'package:lab_2/routes/navigation_drawer.dart';
+import 'package:lab_2/theme.dart';
+import 'package:provider/provider.dart';
 
+import 'custom_card.dart';
 
 
 class Notifications extends StatefulWidget {
@@ -17,7 +19,7 @@ class _NotificationsState extends State<Notifications> {
   final ScrollController _scrollController = ScrollController();
   List<String> items = [];
   bool loading = false, allLoaded = false;
-
+  int _counter = 0;
 
   mockFetch() async {
     if (allLoaded) {
@@ -55,9 +57,14 @@ class _NotificationsState extends State<Notifications> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _scrollController.dispose();
+  }
+
+  void _incrementCounter(){
+    setState(() {
+      _counter++;
+    });
   }
 
   @override
@@ -65,67 +72,32 @@ class _NotificationsState extends State<Notifications> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notifications'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.settings_display),
+              onPressed: (){
+                Provider.of<ThemeProvider>(context, listen: false).swapTheme();
+              }
+          )
+        ],
       ),
-      body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            if (items.isNotEmpty) {
-              return Stack(
-                children: [
-                  ListView.separated(
-                      controller: _scrollController,
-                      itemBuilder: (context, index) {
-                        if (index < items.length) {
-                          if (index.isEven) {
-                            return Card(
-                              child: ListTile(
-                                title: Text("User${index + 1} likes your post."),
-                                trailing: const Icon(Icons.favorite),
-                              ),
-                            );
-                          } else {
-                            return Expanded(
-                              child: ListTile(
-                                leading: const FlutterLogo(),
-                                title: Text(
-                                    "Seems you should be interested in topic${index + 1}"),
-                              ),
-                            );
-                          }
-                        } else {
-                          return SizedBox(
-                            width: constraints.maxWidth,
-                            height: 50,
-                            child: const Center(
-                              child: Text('No notifications any more'),
-                            ),
-                          );
-                        }
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider(height: 1);
-                      },
-                      itemCount: items.length + (allLoaded ? 1 : 0)),
-                  if (loading) ...[
-                    Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: SizedBox(
-                        width: constraints.maxWidth,
-                        height: 80,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-                    ),
-                  ]
-                ],
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
+      body:
+      Center(
+        child: Container(
+            child: ListView.builder(
+              itemCount: _counter,
+              itemBuilder: (context, int index) {
+                return CustomCard(
+                  index: ++index,
+                );
+              },
+            )),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.favorite),
+      ),
       drawer: NavigationDrawer(),
     );
   }

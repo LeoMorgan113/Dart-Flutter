@@ -3,19 +3,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:lab_2/routes/page_route.dart';
 import 'package:provider/provider.dart';
-import 'package:lab_2/routes/settings_provider.dart';
+import 'package:lab_2/routes/settings_notifier.dart';
 import 'navigation_drawer.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
-  static const String routeName = '/suggestions';
+  static const String routeName = '/settings';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.home, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text("Settings"),
@@ -32,9 +32,9 @@ class Settings extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Container(
             padding: EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: Color(0xDDFFFFFF),
-            ),
+            // decoration: const BoxDecoration(
+            //   color: Color(0xDDFFFFFF),
+            // ),
             child: Consumer<SettingsNotifier>(
               builder: (context, provider, child) {
                 return Column(

@@ -38,14 +38,13 @@ class _HideOnScrollState extends State<HideOnScroll>
               : animationController.reverse();
         },
       ),
-      Notifications(),
-      Profile(),
+      const Notifications(),
+      const Profile(),
     ];
   }
 
   @override
   void dispose() {
-    // ...
     animationController.dispose();
     super.dispose();
   }

@@ -50,6 +50,16 @@ class _MainPageState extends State<MainPage>
     return false;
   }
 
+  parseJson(data){
+    jsonDecode(data).forEach((element) {
+      imagesUrl.add(element['download_url']);
+      imagesAuthor.add(element['author']);
+      imagesPath.add(element['url']);
+      imageHero.add(ImageHero(
+          element['download_url'], element['author'], element['url']));
+    });
+  }
+
   Future<String> fetchDataFromApi() async {
     var jsonData = await http.get(
         Uri.parse("https://picsum.photos/v2/list?page=2&limit=50"),
@@ -57,16 +67,8 @@ class _MainPageState extends State<MainPage>
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*"
         });
-    var fetchData = jsonDecode(jsonData.body);
     setState(() {
-      data = fetchData;
-      data.forEach((element) {
-        imagesUrl.add(element['download_url']);
-        imagesAuthor.add(element['author']);
-        imagesPath.add(element['url']);
-        imageHero.add(ImageHero(
-            element['download_url'], element['author'], element['url']));
-      });
+      parseJson(jsonData.body);
     });
     return "Success";
   }

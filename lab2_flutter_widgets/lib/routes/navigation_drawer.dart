@@ -1,8 +1,6 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:lab_2/main.dart';
+import 'package:lab_2/routes/likes_settings.dart';
 
 import 'page_route.dart';
 
@@ -32,7 +30,7 @@ class NavigationDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.redAccent,
+              color: Colors.red,
             ),
             child: Center(
               child: ListTile(
@@ -46,10 +44,11 @@ class NavigationDrawer extends StatelessWidget {
             ),
           ),
           createDrawerBody(icon: Icons.subscriptions_outlined,text: 'Suggestion',
-                   onTap: () => Navigator.pushReplacementNamed(context, PageRoutes.suggestions)),
+                   onTap: () => Navigator.pushNamed(context, '/settings')),
           createDrawerBody(icon: Icons.favorite, text: 'Likes',
                    onTap: () => Navigator.pushReplacementNamed(context, PageRoutes.likes)),
-          createDrawerBody(icon: Icons.image_outlined, text: 'Subscription', onTap: (){}),
+          createDrawerBody(icon: Icons.subscriptions_outlined, text: 'Subscription',
+                   onTap: ()=>Navigator.pushNamed(context, '/subscription')),
         ],
       ),
     );

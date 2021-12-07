@@ -38,6 +38,28 @@ class _FavouritesState extends State<Favourites>
     return false;
   }
 
+  // loading(){
+  //   Future<String> loaded = fetchDataFromApi();
+  //   loaded.then((res) {
+  //     print(res);
+  //   });
+  // }
+  //
+  // Future<String> fetchDataFromApi(){
+  //   Future<String> result = Future.delayed(Duration(seconds: 5), (){
+  //     return "Loaded";
+  //   });
+  //   return result;
+  // }
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   loading();
+  //   print(imagesUrl);
+  // }
+
+
   Future<String> fetchDataFromApi() async {
     http.get(
         Uri.parse("https://picsum.photos/v2/list?page=2&limit=10"),
@@ -57,11 +79,16 @@ class _FavouritesState extends State<Favourites>
     return "Success";
   }
 
+  void clear() {
+    setState(() {
+      count = 0;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     fetchDataFromApi();
-    print(imagesUrl);
   }
 
   @override
@@ -72,7 +99,7 @@ class _FavouritesState extends State<Favourites>
           body: Center(
             child: GridView.builder(
               gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               itemCount: imagesUrl.length,
               itemBuilder: (BuildContext context, int index) {
                 return SingleChildScrollView(

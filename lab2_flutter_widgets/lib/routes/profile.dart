@@ -25,15 +25,17 @@ class PinsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 290,
+    return SingleChildScrollView(
       child: Card(
-          child: Column(children: [
-        Container(
-          height: 260,
-          margin: const EdgeInsets.only(top: 30),
-          child: Image.asset('images/' + img + '.jpg'),
-        ),
+          child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+            Container(
+              height: 250,
+            margin: const EdgeInsets.only(top: 10),
+            child: Image.asset('images/' + img + '.jpg',
+              fit: BoxFit.contain),
+          ),
         ListTile(
           title: Text(title),
           subtitle: Text(subtitle),
@@ -128,9 +130,9 @@ class _ProfileState extends State<Profile> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      blurRadius: 30,
+                      blurRadius: 10,
                       color: Colors.redAccent,
-                      spreadRadius: 2,
+                      spreadRadius: 1,
                     )
                   ],
                 ),
@@ -171,7 +173,7 @@ class _ProfileState extends State<Profile> {
                     },
                     child: Text(btnText),
                     textColor: Colors.black,
-                    color: _hasBeenPressed ? Colors.red : Colors.grey,
+                    color: _hasBeenPressed ? Colors.grey : Colors.red,
                   ),
                 ],
               ),
@@ -220,7 +222,7 @@ class _ProfileState extends State<Profile> {
         ),
       ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushReplacementNamed(context, PageRoutes.suggestions),
+        onPressed: () => {},
         child: Icon(Icons.settings),
       ),
     );

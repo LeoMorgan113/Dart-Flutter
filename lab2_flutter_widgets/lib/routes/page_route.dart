@@ -5,7 +5,7 @@ import 'package:lab_2/routes/profile.dart';
 import 'settings.dart';
 
 class PageRoutes {
-  static const String suggestions = Settings.routeName;
+  static const String settings = Settings.routeName;
   static const String likes = Notifications.routeName;
   static const String profile = Profile.routeName;
 }
